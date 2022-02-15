@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    
+    
+    <title>Weather App</title>
+  <script src="/assets/script.js"></script>
+  <link rel="stylesheet" href="/assets/index.a09d4a85.css">
+</head>
+
+<body id="mainbody" onload="get_default_details()">
+    <div class="container mx-auto px-2 my-3 ">
+        <div class="flex flex-col items-center sm:flex-row justify-center sm:justify-between space-y-3 sm:space-y-0">
+            <div
+                class="left flex flex-row text-lg space-x-3 sm:space-x-1 md:space-x-2 sm:text-lg md:text-3xl items-center tracking-tight cursor-pointer" href="/">
+                <a href="/">
+                <div>
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-6 sm:w-6 md:h-10 md:w-10"
+                        viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z" />
+                    </svg> -->
+                    <img src="/assets/icon.209e1f39.gif" alt=""
+                        class=" h-16 w-[4.5rem] sm:h-14 sm:w-16 md:h-16 md:w-20 rounded-md md:rounded-lg">
+                </div>
+                <div>
+                    <a href="/">Weather App</a>
+                </div>
+            </a>
+            </div>
+            <div class="">
+                <div class="flex flex-row space-x-1 md:space-x-2 items-center">
+                    <input type="search" name="" id="enteredcity" placeholder="City Name"
+                        class="p-1 md:p-2 md:border-2 border border-black rounded-md md:rounded-xl  md:active:outline-2 md:outline-slate-800 w-auto" required>
+                    <div class="search cursor-pointer" onclick="get_all_details()">
+                        <!-- <button
+                            class="sm:hidden p-0.5 border border-black rounded-md hover:bg-slate-900 hover:text-white">Search</button> -->
+                        <div
+                            class="rounded-[50%] p-1 sm:p-2 border border-black hover:text-white hover:bg-slate-900 transition duration-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Weather Section -->
+    <div
+        class="container backdrop-blur-2xl rounded-3xl border border-gray-400 mx-auto mt-20 py-5 pl-2 items-center w-8/12">
+        <div class="flex flex-row justify-between mr-2"  onclick="toggle()">
+            <div></div>
+            <div class="flex flex-row items-center">
+                <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                    <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                    <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                </div>
+                <label for="toggle" class="text-xl"><span id="unit">&#8451;</span></label>
+            </div>
+        </div>
+        <div class="temperaturesection grid grid-cols-2 grid-flow-row gap-0">
+            <div class="left flex flex-col space-y-1 md:space-y-3 lg:space-y-3 justify-start items-start">
+                <div></div>
+                <div class="city text-2xl md:text-4xl lg:text-6xl" id="cityname"></div>
+                <div class="datetime text-md md:text-lgs lg:text-3xl hidden md:block"><span id="time"></span> <span
+                        id="date"></span></div>
+                <div class="time text-sm md:text-md lg:text-xl md:hidden" id="time-sm"></div>
+                <div class="date text-sm md:text-md lg:text-xl md:hidden" id="date-sm"></div>
+                <div class="icon">
+                    <img src="" alt="" class="w-20 h-20 md:h-32 md:w-32 rounded-xl bg-transparent" id="descriptionimg">
+                </div>
+                <br class="hidden lg:block">
+                <div class="description text-lg md:text-xl lg:text-3xl" id="description"></div>
+                <br class="hidden lg:block">
+            </div>
+            <div class="right">
+                <div class="flex flex-col space-y-4 justify-center items-center">
+                    <div></div>
+                    <br><br>
+                    <div class="temp text-4xl md:text-6xl lg:text-9xl tracking-tighter"><span
+                            class="current-temp"></span>&deg</div>
+                    <br class="hidden md:block"><br class="hidden md:block">
+                    <div class="maxmin text-base md:text-lg lg:text-3xl">
+                        <span><span class="max-temp"></span><sup>&deg</sup><sub>Hi</sub></span> /
+                        <span><span class="min-temp"></span><sup>&deg</sup><sub>Lo</sub></span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Details Section -->
+    <div
+        class="details container backdrop-blur-2xl rounded-3xl border border-gray-400 mx-auto mt-10 py-5 pl-2 items-center w-11/12">
+        <div class="text-white text-md md:text-lg lg:text-3xl text-center font-extrabold tracking-wide pb-6">
+            Current Weather Information
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+            <div class="temp bg-slate-50 p-2 mx-1 rounded-lg flex flex-row justify-between items-center">
+                <div class="text-sm md:text-xl lg:text-4xl flex flex-row items-center space-x-2">
+                    <img src="/assets/temperature.ef298810.gif" alt=""
+                        class="h-10 w-10 sm:h-16 sm:w-12 md:h-20 md:w-20 lg:h-24 lg:w-24">
+                    <div class="hidden sm:block">Temperature</div>
+                    <div class="sm:hidden">Temp</div>
+                </div>
+                <div class="text-sm md:text-xl lg:text-4xl"><span class="current-temp"></span>&deg</div>
+            </div>
+            <div class="feel bg-slate-50 p-2 mx-1 rounded-lg flex flex-row justify-between items-center">
+                <div class="text-sm md:text-xl lg:text-4xl flex flex-row items-center space-x-2">
+                    <img src="/assets/icons8-temperature.b8ef82d5.gif" alt=""
+                        class="h-10 w-10 sm:h-16 sm:w-12 md:h-20 md:w-20 lg:h-24 lg:w-24">
+                    <div>Feels Like</div>
+                </div>
+                <div class="text-sm md:text-xl lg:text-4xl"><span id="feels-like"></span>&deg</div>
+            </div>
+            <div class="maxtemp bg-slate-50 p-2 mx-1 rounded-lg flex flex-row justify-between items-center">
+                <div class="text-sm md:text-xl lg:text-4xl flex flex-row items-center space-x-2">
+                    <img src="/assets/max.b233d463.gif" alt="" class="h-10 w-10 sm:h-16 sm:w-12 md:h-20 md:w-20 lg:h-24 lg:w-24">
+                    <div>Max</div>
+                </div>
+                <div class="text-sm md:text-xl lg:text-4xl"><span class="max-temp"></span>&deg</div>
+            </div>
+            <div class="mintemp bg-slate-50 p-2 mx-1 rounded-lg flex flex-row justify-between items-center">
+                <div class="text-sm md:text-xl lg:text-4xl flex flex-row items-center space-x-2">
+                    <img src="/assets/min.7b872cef.gif" alt="" class="h-10 w-10 sm:h-16 sm:w-12 md:h-20 md:w-20 lg:h-24 lg:w-24">
+                    <div>Min</div>
+                </div>
+                <div class="text-sm md:text-xl lg:text-4xl"><span class="min-temp"></span>&deg</div>
+            </div>
+            <div class="sunrise bg-slate-50 p-2 mx-1 rounded-lg flex flex-row justify-between items-center">
+                <div class="text-sm md:text-xl lg:text-4xl flex flex-row items-center space-x-2">
+                    <img src="/assets/sunrise.bb9fa500.svg" alt="" class="h-10 w-10 sm:h-16 sm:w-12 md:h-20 md:w-20 lg:h-24 lg:w-24">
+                    <div>Sunrise Time</div>
+                </div>
+                <div class="text-sm md:text-xl lg:text-4xl" id="sunrise-time"></div>
+            </div>
+            <div class="sunset bg-slate-50 p-2 mx-1 rounded-lg flex flex-row justify-between items-center">
+                <div class="text-sm md:text-xl lg:text-4xl flex flex-row items-center space-x-2">
+                    <img src="/assets/sunset.b1b27bba.svg" alt="" class="h-10 w-10 sm:h-16 sm:w-12 md:h-20 md:w-20 lg:h-24 lg:w-24">
+                    <div>Sunset Time</div>
+                </div>
+                <div class="text-sm md:text-xl lg:text-4xl" id="sunset-time"></div>
+            </div>
+            <div class="pressure bg-slate-50 p-2 mx-1 rounded-lg flex flex-row justify-between items-center">
+                <div class="text-xs sm:text-base md:text-xl lg:text-4xl flex flex-row items-center space-x-2">
+                    <img src="/assets/windspeed.55969f4e.gif" alt="" class="h-10 w-10 sm:h-16 sm:w-12 md:h-20 md:w-20 lg:h-24 lg:w-24">
+                    <div>Wind Speed</div>
+                </div>
+                <div class="text-xs sm:text-sm md:text-xl lg:text-4xl"><span id="wind-speed"></span> m/s</div>
+            </div>
+            <div class="humidity bg-slate-50 p-2 mx-1 rounded-lg flex flex-row justify-between items-center">
+                <div class="text-sm md:text-xl lg:text-4xl flex flex-row items-center space-x-2">
+                    <img src="/assets/humidity1.b565a303.gif" alt="" class="h-10 w-10 sm:h-16 sm:w-12 md:h-20 md:w-20 lg:h-24 lg:w-24">
+                    <div>Humidity</div>
+                </div>
+                <div class="text-sm md:text-xl lg:text-4xl"><span id="humidity"></span> %</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer text-center text-lg text-white font-extralight bg-black mt-10 py-10">
+        All rights reserved &#169; Weather App 2022 
+    </div>
+</body>
+
+</html>
