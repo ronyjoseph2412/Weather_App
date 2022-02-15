@@ -123,7 +123,6 @@ function get_all_details_toggled(unit, x) {
                 document.getElementById('descriptionimg').src = '/assets/whirlwind.gif';
             }
             else if (weather_main === "Smoke" || weather_main === "Haze") {
-                console.log("hey");
                 document.getElementById('descriptionimg').src = '/assets/smoke.svg';
             }
             else if (weather_main === "Fog") {
