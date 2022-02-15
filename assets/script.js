@@ -82,13 +82,26 @@ function get_all_details_toggled(unit, x) {
 
         let weather_main = data["weather"][0]["main"];
         let weahter_details = data["weather"][0]["description"];
+        var morning_hours = [6,7,8,9,10,11,12,13,14,15,16,17];
+        var night_hours = [18,19,20,21,22,23,0,1,2,3,4,5];
+        function checkValue(value, arr) {
+            var status = false;
+            for (var i = 0; i < arr.length; i++) {
+                var name = arr[i];
+                if (name == value) {
+                    status = true;
+                    break;
+                }
+            }
+            return status;
+        }
         find_weather(weather_main, weahter_details);
         function find_weather(weather_main, weahter_details) {
             if (weather_main === "Clouds") {
-                if (hours >= 6 && hours < 18) {
+                if (checkValue(today_date.getHours(),morning_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/cloudsmorning.gif';
                 }
-                else if (hours >= 18 && hours < 6) {
+                else if (checkValue(today_date.getHours(),night_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/cloudsnight.gif';
                 }
                 else {
@@ -96,10 +109,10 @@ function get_all_details_toggled(unit, x) {
                 }
             }
             else if (weather_main === "Clear") {
-                if (hours >= 6 && hours < 18) {
+                if (checkValue(today_date.getHours(),morning_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/clearmorning.gif';
                 }
-                else if (hours >= 18 && hours < 6) {
+                else if (checkValue(today_date.getHours(),night_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/clearnight.gif';
                 }
             }
@@ -114,10 +127,10 @@ function get_all_details_toggled(unit, x) {
                 document.getElementById('descriptionimg').src = '/assets/smoke.svg';
             }
             else if (weather_main === "Fog") {
-                if (hours >= 6 && hours < 18) {
+                if (checkValue(today_date.getHours(),morning_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/foggymorning.svg';
                 }
-                else if (hours >= 18 && hours < 6) {
+                else if (checkValue(today_date.getHours(),night_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/foggynight.svg';
                 }
             }
@@ -136,7 +149,7 @@ function get_all_details_toggled(unit, x) {
                 if (weahter_details === "light intensity shower rain" || weahter_details === "shower rain" || weahter_details === "heavy intensity shower rain" || weahter_details === "ragged shower rain") {
                     document.getElementById('descriptionimg').src = '/assets/rainsnow.gif';
                 }
-                else if (hours >= 6 && hours <= 15) {
+                else if (checkValue(today_date.getHours(),morning_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/rainmorning.gif';
                 }
                 else {
@@ -227,13 +240,26 @@ function get_all_details() {
 
         let weather_main = data["weather"][0]["main"];
         let weahter_details = data["weather"][0]["description"];
+        var morning_hours = [6,7,8,9,10,11,12,13,14,15,16,17];
+        var night_hours = [18,19,20,21,22,23,0,1,2,3,4,5];
+        function checkValue(value, arr) {
+            var status = false;
+            for (var i = 0; i < arr.length; i++) {
+                var name = arr[i];
+                if (name == value) {
+                    status = true;
+                    break;
+                }
+            }
+            return status;
+        }
         find_weather(weather_main, weahter_details);
         function find_weather(weather_main, weahter_details) {
             if (weather_main === "Clouds") {
-                if (hours >= 6 && hours < 18) {
+                if (checkValue(today_date.getHours(),morning_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/cloudsmorning.gif';
                 }
-                else if (hours >= 18 && hours < 6) {
+                else if (checkValue(today_date.getHours(),night_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/cloudsnight.gif';
                 }
                 else {
@@ -241,10 +267,10 @@ function get_all_details() {
                 }
             }
             else if (weather_main === "Clear") {
-                if (hours >= 6 && hours < 18) {
+                if (checkValue(today_date.getHours(),morning_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/clearmorning.gif';
                 }
-                else if (hours >= 18 && hours < 6) {
+                else if (checkValue(today_date.getHours(),night_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/clearnight.gif';
                 }
             }
@@ -255,13 +281,14 @@ function get_all_details() {
                 document.getElementById('descriptionimg').src = '/assets/whirlwind.gif';
             }
             else if (weather_main === "Smoke" || weather_main === "Haze") {
+                console.log("hey");
                 document.getElementById('descriptionimg').src = '/assets/smoke.svg';
             }
             else if (weather_main === "Fog") {
-                if (hours >= 6 && hours < 18) {
+                if (checkValue(today_date.getHours(),morning_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/foggymorning.svg';
                 }
-                else if (hours >= 18 && hours < 6) {
+                else if (checkValue(today_date.getHours(),night_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/foggynight.svg';
                 }
             }
@@ -280,7 +307,7 @@ function get_all_details() {
                 if (weahter_details === "light intensity shower rain" || weahter_details === "shower rain" || weahter_details === "heavy intensity shower rain" || weahter_details === "ragged shower rain") {
                     document.getElementById('descriptionimg').src = '/assets/rainsnow.gif';
                 }
-                else if (hours >= 6 && hours <= 15) {
+                else if (checkValue(today_date.getHours(),morning_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/rainmorning.gif';
                 }
                 else {
@@ -373,13 +400,26 @@ function get_default_details() {
         // document.getElementById('descriptionimg').src = '/assets/cloudsmorning.gif';
         let weather_main = data["weather"][0]["main"];
         let weahter_details = data["weather"][0]["description"];
+        var morning_hours = [6,7,8,9,10,11,12,13,14,15,16,17];
+        var night_hours = [18,19,20,21,22,23,0,1,2,3,4,5];
+        function checkValue(value, arr) {
+            var status = false;
+            for (var i = 0; i < arr.length; i++) {
+                var name = arr[i];
+                if (name == value) {
+                    status = true;
+                    break;
+                }
+            }
+            return status;
+        }
         find_weather(weather_main, weahter_details);
         function find_weather(weather_main, weahter_details) {
             if (weather_main === "Clouds") {
-                if (hours >= 6 && hours < 18) {
+                if (checkValue(today_date.getHours(),morning_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/cloudsmorning.gif';
                 }
-                else if (hours >= 18 && hours < 6) {
+                else if (checkValue(today_date.getHours(),night_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/cloudsnight.gif';
                 }
                 else {
@@ -387,10 +427,10 @@ function get_default_details() {
                 }
             }
             else if (weather_main === "Clear") {
-                if (hours >= 6 && hours < 18) {
+                if (checkValue(today_date.getHours(),morning_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/clearmorning.gif';
                 }
-                else if (hours >= 18 && hours < 6) {
+                else if (checkValue(today_date.getHours(),night_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/clearnight.gif';
                 }
             }
@@ -405,10 +445,10 @@ function get_default_details() {
                 document.getElementById('descriptionimg').src = '/assets/smoke.svg';
             }
             else if (weather_main === "Fog") {
-                if (hours >= 6 && hours < 18) {
+                if (checkValue(today_date.getHours(),morning_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/foggymorning.svg';
                 }
-                else if (hours >= 18 && hours < 6) {
+                else if (checkValue(today_date.getHours(),night_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/foggynight.svg';
                 }
             }
@@ -427,7 +467,7 @@ function get_default_details() {
                 if (weahter_details === "light intensity shower rain" || weahter_details === "shower rain" || weahter_details === "heavy intensity shower rain" || weahter_details === "ragged shower rain") {
                     document.getElementById('descriptionimg').src = '/assets/rainsnow.gif';
                 }
-                else if (hours >= 6 && hours <= 15) {
+                else if (checkValue(today_date.getHours(),morning_hours)) {
                     document.getElementById('descriptionimg').src = '/assets/rainmorning.gif';
                 }
                 else {
